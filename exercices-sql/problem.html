@@ -1,0 +1,177 @@
+<html>
+
+<head>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+	<script src="codemirror.js"></script>
+	<script src="sql.js"></script>
+	<link rel="stylesheet" href="codemirror.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"
+		integrity="sha512-L6uhvfNcUH0q/Y1IWnX/IlweC3hvYNIwSsvwWL2b2V7692tnGPxQwwDEpR8kFnUa0VSSNalR3FnEF4gr4jti+A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+		integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		referrerpolicy="no-referrer"></script>
+
+	<script src="correction.js"></script>
+
+	<title class="tit"></title>
+</head>
+
+<body>
+
+	<div class="col-lg-8 mx-auto p-3 py-md-5">
+		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+			<i class="bi bi-trophy"></i>
+			&nbsp;
+			<a class="d-flex align-items-center text-dark text-decoration-none">
+				<span class="fs-4 tit"></span>
+			</a>
+		</header>
+
+		<div style="text-align: right">
+			<a href="/">Retour aux problèmes</a>
+		</div>
+
+		<main>
+			<span id="enonce"></span><br /><br />
+
+			<script id="entry-template" type="text/x-handlebars-template">
+
+				{{#each tables}}
+					<table class="table table-striped table-bordered" style="font-size: smaller;">
+						<thead>
+							<tr>
+								<th colspan="6" style="text-align: center; text-decoration: underline;">{{name}}</th>
+							</tr>
+						</thead>
+						<thead>
+							<tr>
+								{{#each columns}}
+									<th>{{this}}</th>
+								{{/each}}
+							</tr>
+						</thead>
+						<tbody>
+							{{#each rows}}
+								<tr>
+									{{#each fields}}
+										<td>{{this}}</td>
+									{{/each}}
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				{{/each}}
+
+			</script>
+
+			<textarea id="tecode">-- Réponse :
+
+
+				</textarea><br />
+
+			<button type="button" class="btn btn-outline-primary" id="executer">
+				<i class="bi bi-caret-right"></i>
+				Exécuter</button>
+
+			<button type="button" class="btn btn-success" id="corriger">
+				<i class="bi bi-caret-right"></i>
+				Corriger</button><br /><br />
+
+			<div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+				Félicitations !
+			</div>
+
+			<div id="disp-fail" class="alert alert-danger alert-dismissible fade show" role="alert"
+				style="display: none;">
+				Échec ! Votre réponse ne donne pas les résultats attendus.
+			</div>
+
+			<div id="sql-error" class="alert alert-danger alert-dismissible fade show" role="alert"
+				style="display: none;"></div>
+
+			<script id="result-template" type="text/x-handlebars-template">
+
+				<table class="table table-striped table-bordered" style="font-size: smaller;">
+					<thead>
+						<tr>
+							<th colspan="6" style="text-align: center; text-decoration: underline;">{{name}}</th>
+						</tr>
+					</thead>
+					<thead>
+						<tr>
+							{{#each columns}}
+								<th>{{this}}</th>
+							{{/each}}
+						</tr>
+					</thead>
+					<tbody>
+						{{#each values}}
+							<tr>
+								{{#each this}}
+									<td>{{this}}</td>
+								{{/each}}
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+
+			</script>
+
+			<div id="result-display"></div>
+
+			<div id="schema" style="display: none">
+
+			</div>
+
+			<div id="data" style="display: none">
+
+			</div>
+
+			<div id="solution" style="display: none">
+
+			</div>
+
+			<div id="test" style="display: none;">
+
+			</div>
+			<div id="disqus_thread"></div>
+			<script>
+				/**
+				*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+				*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+				/*
+				var disqus_config = function () {
+				this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+				};
+				*/
+				(function () { // DON'T EDIT BELOW THIS LINE
+					var d = document, s = d.createElement('script');
+					s.src = 'https://exercices-sql.disqus.com/embed.js';
+					s.setAttribute('data-timestamp', +new Date());
+					(d.head || d.body).appendChild(s);
+				})();
+			</script>
+		</main>
+		<footer class="pt-5 my-5 text-muted border-top">
+
+		</footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<html>
+
+<head>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		referrerpolicy="no-referrer"></script>
+
+	<script>
+
+		$(window).ready(function () {
+			var ids = window.localStorage.getItem("ids")?.split(",") ?? []
+
+			for (var i = 0; i < ids.length; ++i) {
+				$("i#" + ids[i]).addClass("bi-check-square-fill").removeClass("arrow-right-circle");
+				$("i#" + ids[i]).removeClass("bi-arrow-right-circle");
+			}
+			$("span:contains('facile')").addClass("bg-primary")
+			$("span:contains('moyen')").addClass("bg-success")
+			$("span:contains('difficile')").addClass("bg-danger")
+		});
+	</script>
+
+</head>
+
+
+<body>
+
+	<div class="col-lg-8 mx-auto p-3 py-md-5">
+		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+			<i class="bi bi-trophy"></i>
+			&nbsp;
+			<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+				<span class="fs-4">Execices SQL interactifs</span>
+			</a>
+		</header>
+
+		<main>
+			<h1>Testez vos competences en SQL</h1>
+			<p class="fs-5 col-md-8">L'apprentissage du SQL par la pratique.</p>
+
+			<hr class="col-3 col-md-2 mb-5">
+
+			<div class="row mb-3">
+				<div class="col-md-8 themed-grid-col">
+
+
+					<i id="1" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=1">Une seule ligne par un simple SELECT</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="2" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=2">Trier par ordre décroissant avec ORDER BY</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="3" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=3">Les deux plus grandes : ORDER BY + LIMIT</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="4" class="bi bi-check-square-fill"></i>
+					<a href="problem.html?id=4">Une ville en particulier avec WHERE</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="5" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=5">Un intervalle de latitudes avec BETWEEN</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="6" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=6">L'aggrégation avec COUNT, AVG, MIN, MAX et SUM</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="7" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=7">Des conditions avec AND et OR</a>
+					<span class="badge rounded-pill bg-primary">facile</span>
+					<br><br>
+
+
+					<i id="8" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=8">Afficher les élèves et leur classe via un INNER JOIN</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="9" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=9">Afficher les élèves et leur classe via un LEFT JOIN</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="10" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=10">Lister les notes et les matieres avec plusieurs JOIN</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="11" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=11">Calculer la moyenne avec GROUP BY et INNER JOIN</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="12" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=12">Calculer la moyenne par élève avec GROUP BY et JOIN</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="13" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=13">Les élèves n'ayant jamais été notés : NOT EXISTS</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="14" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=14">La moyenne par matiere</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="15" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=15">Au moins 12 de moyenne : HAVING</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="16" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=16">Moyenne littéraire ou scientifique</a>
+					<span class="badge rounded-pill bg-success">moyen</span>
+					<br><br>
+
+
+					<i id="17" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=17">Troisième note la plus élevée</a>
+					<span class="badge rounded-pill bg-danger">difficile</span>
+					<br><br>
+
+
+					<i id="18" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=18">Moyenne des élèves ayant au moins la moyenne</a>
+					<span class="badge rounded-pill bg-danger">difficile</span>
+					<br><br>
+
+
+					<i id="19" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=19">Moyenne pondérée par matière</a>
+					<span class="badge rounded-pill bg-danger">difficile</span>
+					<br><br>
+
+
+					<i id="20" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=20">Deuxieme meilleure note dans chaque niveau</a>
+					<span class="badge rounded-pill bg-danger">difficile</span>
+					<br><br>
+
+
+					<i id="21" class="bi bi-arrow-right-circle"></i>
+					<a href="problem.html?id=21">Compétition et matchs 1x1</a>
+					<span class="badge rounded-pill bg-danger">difficile</span>
+					<br><br>
+
+				</div>
+
+				<div class="col-md-4 themed-grid-col">
+					<!-- <h2>Categories</h2>
+																																							                <span class="badge rounded-pill bg-primary">Easy</span>
+																																							                <span class="badge rounded-pill bg-success">Medium</span>
+																																							                <span class="badge rounded-pill bg-danger">Hard</span>
+																																							                <span class="badge rounded-pill bg-danger">Pro</span>
+																																							
+																																							                <hr/>
+																																							                <h2>Contribute</h2>
+																																							                <i class="bi bi-chat-right-text"></i> <a href="">Contribute to SQL challenge</a> and design your own problems. -->
+				</div>
+			</div>
+			<div id="disqus_thread"></div>
+			<script>
+				/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+				/*
+					var disqus_config = function () {
+					this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+					this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+					};
+					*/
+				(function () { // DON'T EDIT BELOW THIS LINE
+					var d = document,
+						s = d.createElement('script');
+					s.src = 'https://exercices-sql.disqus.com/embed.js';
+					s.setAttribute('data-timestamp', + new Date());
+					(d.head || d.body).appendChild(s);
+				})();
+			</script>
+		</main>
+		<footer class="pt-5 my-5 text-muted border-top">
+
+		</footer>
+	</div>
+
+</body>
+
+</html>
