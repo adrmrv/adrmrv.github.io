@@ -3,13 +3,13 @@ $(document).ready(function () {
 	var params = new URLSearchParams(document.location.search);
 	var id = params.get("id");
 
-	$.get("" + id + ".txt", function (data) {
-		$("#schema").text(/\[schema\](.*)\[\/schema\]/s.exec(data)[1])
-		$("#data").text(/\[data\](.*)\[\/data\]/s.exec(data)[1])
-		$(".tit").text(/\[title\](.*)\[\/title\]/s.exec(data)[1])
-		$("#test").text(/\[test\](.*)\[\/test\]/s.exec(data)[1])
-		$("#solution").text(/\[solution\](.*)\[\/solution\]/s.exec(data)[1])
-		$("#enonce").text(/(.*?)\[/s.exec(data)[1])
+	$.get(id + ".sql", function (data) {
+		$("#schema").text(/--schema(.*)--schema/s.exec(data)[1])
+		$("#data").text(/--data(.*)--data/s.exec(data)[1])
+		$(".tit").text(/--title (.*?)\n/s.exec(data)[1])
+		$("#test").text(/--test(.*)--test/s.exec(data)[1])
+		$("#solution").text(/--solution(.*)--solution/s.exec(data)[1])
+		$("#enonce").html(/\/\*(.*?)\*\//s.exec(data)[1])
 
 		ready();
 	});
@@ -137,8 +137,8 @@ function ready() {
 			var template = Handlebars.compile(source);
 
 			document.getElementById("result-display").innerHTML =
-				template({ name: "Votre résultat", values: rep?.values, columns: rep?.columns })
-				+ template({ name: "Résultat attendu", values: att.values, columns: att.columns });
+				template({ name: "Votre resultat", values: rep?.values, columns: rep?.columns })
+				+ template({ name: "Resultat attendu", values: att.values, columns: att.columns });
 
 			failure = true;
 		}
@@ -224,7 +224,9 @@ function ready() {
 		db.run(sqlData);
 
 		try {
-			var rep = db.exec(reponse)[0];
+			var rep = db.exec(reponse);
+			console.log(rep)
+			rep = rep[0]
 		} catch (ex) {
 			sqlerror = ex.message;
 		}
@@ -241,7 +243,7 @@ function ready() {
 		var template = Handlebars.compile(source);
 
 		document.getElementById("result-display").innerHTML =
-			template({ name: "Résultat", values: rep?.values, columns: rep?.columns });
+			template({ name: "Resultat", values: rep?.values, columns: rep?.columns });
 
 	});
 };
