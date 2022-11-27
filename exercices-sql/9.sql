@@ -1,15 +1,15 @@
-Afficher les noms, prénoms et classes des élèves. Inclure les élèves n'ayant pas de classe affectée.
+/*Afficher les noms, prénoms et classes des élèves. Inclure les élèves n'ayant pas de classe affectée.*/
 
-[title]Afficher les élèves et leur classe via un LEFT JOIN[/title]
+--title Afficher les élèves et leur classe via un LEFT JOIN
 
-[schema]
+--schema
 create table eleve (ele_id, ele_nom, ele_prenom, cla_id);
 create table matiere (mat_id, mat_nom, mat_categorie);
 create table note (not_id, ele_id, mat_id, not_note);
 create table classe (cla_id, cla_nom, cla_niveau);
-[/schema]
+--schema
 
-[data]
+--data
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -33,15 +33,15 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/data]
+--data
 
-[solution]
+--solution
 SELECT ele_nom, ele_prenom, cla_nom from eleve e
 left JOIN classe c on c.cla_id = e.cla_id
 order by ele_nom
-[/solution]
+--solution
 
-[test]
+--test
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -64,4 +64,4 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/test]
+--test

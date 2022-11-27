@@ -1,14 +1,14 @@
-Lister les noms et les moyennes générales des élèves ayant au moins 12 de moyenne. Trier les résultats de la plus basse à la plus élevée.
-[schema]
+/*Afficher la 3e note la plus élevée ansi que le nom de l'élève l'ayant obtenue et la matiere correspondante*/
+--schema
 create table eleve (ele_id, ele_nom, ele_prenom, cla_id);
 create table matiere (mat_id, mat_nom, mat_categorie);
 create table note (not_id, ele_id, mat_id, not_note);
 create table classe (cla_id, cla_nom, cla_niveau);
-[/schema]
+--schema
 
-[title]Au moins 12 de moyenne : HAVING[/title]
+--title Troisième note la plus élevée
 
-[data]
+--data
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -32,20 +32,17 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/data]
+--data
 
-[solution]
-select ele_nom, avg(not_note)
+--solution
+with cte as (select *, row_number() over (order by not_note desc) rank from note)
+select not_note, ele_nom, mat_nom from cte c
+inner join matiere m on m.mat_id = c.mat_id
+inner join eleve e on e.ele_id = c.ele_id
+where rank = 3
+--solution
 
-from eleve e
-inner join note n on n.ele_id = e.ele_id
-
-group by ele_nom
-having avg(not_note) >= 12
-order by avg(not_note)
-[/solution]
-
-[test]
+--test
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -59,8 +56,6 @@ insert into matiere values
 insert into note values
 (1, 4, 2, 20),
 (3, 3, 3, 13),
-(3, 1, 3, 1),
-(3, 3, 3, 18),
 (4, 5, 2, 3),
 (5, 4, 4, 11);
 insert into classe values
@@ -69,4 +64,4 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/test]
+--test

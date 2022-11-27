@@ -1,14 +1,14 @@
-Pour chaque niveau (5e et 6e), donner la deuxième meilleure note jamais obtenue ansi que la matiere dans laquelle elle a été obtenue. Afficher dans l'ordre : le niveau, la matiere puis la note. Trier par ordre de niveau.
-[schema]
+/*Le lycée organise une compétition dans laquelle chaque élève doit affronter tous les autres. Calculer la liste de tous les match et afficher pour chaque match les deux noms qui doivent s'affronter. Trier les résultats par ordre alphabétique.*/
+--schema
 create table eleve (ele_id, ele_nom, ele_prenom, cla_id);
 create table matiere (mat_id, mat_nom, mat_categorie, mat_coef);
 create table note (not_id, ele_id, mat_id, not_note);
 create table classe (cla_id, cla_nom, cla_niveau);
-[/schema]
+--schema
 
-[title]Deuxieme meilleure note dans chaque niveau[/title]
+--title Compétition et matchs 1x1
 
-[data]
+--data
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -37,23 +37,17 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/data]
+--data
 
-[solution]
-with cte as (
-select cla_niveau, m.mat_nom, n.not_note, row_number() over (partition by cla_niveau order by not_note desc) rang
-from classe c
-inner join eleve e on e.cla_id = c.cla_id
-inner join note n on n.ele_id = e.ele_id
-inner join matiere m on m.mat_id = n.mat_id
-)
-select cla_niveau, mat_nom, not_note
-from cte
-where rang = 2
-order by cla_niveau
-[/solution]
+--solution
+select e.ele_nom, ee.ele_nom
+from eleve e
+cross join eleve ee
+where e.ele_id <> ee.ele_id
+order by e.ele_nom, ee.ele_nom   
+--solution
 
-[test]
+--test
 insert into eleve values
 (1, "Martel", "Camille", 1),
 (2, "Dijoux", "William", 2),
@@ -77,4 +71,4 @@ insert into classe values
 (3, "5A", 5),
 (4, "5B", 5),
 (5, "5C", 5);
-[/test]
+--test

@@ -1,11 +1,12 @@
-Trier les villes suivantes par ID décroissant. Afficher toutes les colonnes mais uniquement les deux dernieres lignes.
-[schema]
+/*Trier les villes suivantes par ID décroissant. <br/>Afficher toutes les lignes, toutes les colonnes.*/
+--schema
 create table ville (ville_id, insee_code, zip_code, nom, gps_lat, gps_lng)
 
-[/schema]
+--schema
 
-[title]Les deux plus grandes : ORDER BY + LIMIT[/title]
-[data]
+--title Trier par ordre décroissant avec ORDER BY
+
+--data
 insert into ville values
 
 (1, 1001, 1400, "Abergement-Clémenciat", 46.156781992032, 4.9246992031872),
@@ -17,12 +18,12 @@ insert into ville values
 (4, 1005, 1330, "Ambérieux-en-Dombes", 46.000120392157, 4.9106016993464),
 
 (5, 1006, 1300, "Ambléon", 45.746426904762, 5.6024917857143)
-[/data]
+--data
 
-[solution]
-select * from ville order by ville_id desc limit 2
-[/solution]
+--solution
+select * from ville order by ville_id desc
+--solution
 
-[test]
+--test
 
-[/test]
+--test
